@@ -17,38 +17,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductsService {
 
-    private static String CROWN_SNACK_URL = "http://www.crown.co.kr/product/pList.asp?catecode=1478063302";
-    private static String CROWN_BISCUIT_URL = "http://www.crown.co.kr/product/pList.asp?catecode=1478063272";
     private final ProductsRepository productsRepository;
+
     @PostConstruct
     public List<CrownProducts> getCrownProducts() throws IOException {
         List<CrownProducts> productsList = new ArrayList<>();
-        Document doc_snack = Jsoup.connect(CROWN_SNACK_URL).get();
-        Elements contents_snack = doc_snack.getElementsByClass("links");
-        for (Element content : contents_snack) {
-            CrownProducts products = CrownProducts.builder()
-                    .productName(content.select("p").text())
-                    .productImage(content.select("img").attr("abs:src"))//.attr("abs:src"))
-                    .build();
-            productsList.add(products);
+        for (int i = 272; i < 303; i++) {
+            String url = "http://www.crown.co.kr/product/pList.asp?catecode=1478063" + String.valueOf(i);
 
-            productsRepository.save(products);
+            if (i == 272 || i == 299 || i == 302) {
+
+                Document doc = Jsoup.connect(url).get();
+                Elements contents = doc.getElementsByClass("links");
+                for (Element content : contents) {
+                    CrownProducts products = CrownProducts.builder()
+                            .productName(content.select("p").text())
+                            .productImage(content.select("img").attr("abs:src"))//.attr("abs:src"))
+                            .build();
+                    productsList.add(products);
+
+                    productsRepository.save(products);
+                }
+            }
         }
-
-        Document doc_biscuit = Jsoup.connect(CROWN_BISCUIT_URL).get();
-        Elements contents_biscuit  = doc_biscuit.getElementsByClass("links");
-        for (Element content : contents_biscuit) {
-            CrownProducts products = CrownProducts.builder()
-                    .productName(content.select("p").text())
-                    .productImage(content.select("img").attr("abs:src"))//.attr("abs:src"))
-                    .build();
-            productsList.add(products);
-
-            productsRepository.save(products);
-        }
-
         return productsList;
     }
-
-
 }
