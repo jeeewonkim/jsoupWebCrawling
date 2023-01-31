@@ -92,14 +92,11 @@ function myFunction() {
   <tr>
     <th>이미지</th>
     <th>상품명</th>
-    <th>브랜드</th>
-    <th>카테고리</th>
+
   </tr>
   <tr th:each="products : ${products}" >
     <td><img th:src="${products.productImage}"></td>
     <td><span th:text = "${products.productName}"></span></td>
-    <td><span th:text = "${products.productBrand}"></span></td>
-    <td><span th:text = "${products.category}"></span></td>
   </tr>
 </table>
 
