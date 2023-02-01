@@ -1,6 +1,6 @@
 # jsoupWebCrawling
 
-🥨🍫 jsoup을 이용한 해태 제과, 크라운 제과 홈페이지 제품 이미지, 이름 크롤링 (SNACK, BISCUIT)
+🥨 jsoup, mysql 을 이용한 해태 제과, 크라운 제과 홈페이지 제품 이미지, 이름 크롤링 (SNACK, BISCUIT)
 
 <해태 제과 크롤링>
 
