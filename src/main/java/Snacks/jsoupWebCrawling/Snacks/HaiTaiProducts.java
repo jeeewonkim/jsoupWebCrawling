@@ -13,11 +13,10 @@ import javax.persistence.Table;
 @ToString
 @Builder
 @Getter
-@Table(name = "crownTBL")
+@Table(name = "haitaiTBL")
 @Entity
 @NoArgsConstructor
-public class CrownProducts {
-
+public class HaiTaiProducts {
     @Id
     @Column(name = "productName")
     private String productName;
@@ -28,7 +27,8 @@ public class CrownProducts {
     @Column(name = "brand")
     private String brand;
 
-    public CrownProducts(String productName, String productImage, String brand){
+
+    public HaiTaiProducts(String productName, String productImage,String brand){
         this.productName = productName;
         this.productImage = productImage;
         this.brand = brand;
