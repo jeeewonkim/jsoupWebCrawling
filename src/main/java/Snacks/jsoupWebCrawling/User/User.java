@@ -48,7 +48,7 @@ public class User {
         this.role = role;
     }
 
-    public static User createUser(UserDto userDto, PasswordEncoder passwordEncoder) {
+   /* public static User createUser(UserInfoDto userDto, PasswordEncoder passwordEncoder) {
         User user = User.builder()
                 .userId(userDto.getUserId())
                 .userEmail(null)
@@ -59,5 +59,13 @@ public class User {
                 .build();
         return user;
 
+    }*/
+
+    public void encodePassword(PasswordEncoder passwordEncoder){
+        this.password = passwordEncoder.encode(password);
+    }
+
+    public void addUserAuthority(){
+        this.role = role.USER;
     }
 }

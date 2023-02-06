@@ -1,6 +1,9 @@
 package Snacks.jsoupWebCrawling.User;
 
+import Snacks.jsoupWebCrawling.User.Dto.UserSignUpDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,7 +23,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
-    @RequestMapping(value = "/signup.do", method = {RequestMethod.GET})
+ /*   @RequestMapping(value = "/signup.do", method = {RequestMethod.GET})
     public String signup(Model model) {
         model.addAttribute("userDto", new UserDto());
         return "signup";
@@ -41,5 +48,11 @@ public class UserController {
 
         return "redirect:/";
 
+    }*/
+    @PostMapping("/signup")
+    public ResponseEntity signUp(@Valid @RequestBody UserSignUpDto userSignUpDto)throws Exception {
+        userService.signUp(userSignUpDto);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
+
 }
